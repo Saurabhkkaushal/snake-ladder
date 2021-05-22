@@ -1,23 +1,32 @@
 class PositionFactory
 
+  def add(type, position, final_position)
+    type.constantize.new.add(
+      position: position, final_pos: final_position
+    )
+  end
+
   def get_final_pos(for_pos)
-    return [for_pos, false] if !exists?
-
-    while(!exists?(pos))
-      pos = exists?(pos)
-    end
-
-    pos
+    exists?(for_pos)
   end
 
   private
 
   def exists?(pos)
-    class_var.each do |info|
-      return info.position if info.position == pos
+    childs.each do |child|
+      child.constantize.new.class_var.each do |info|
+        if info.position == pos
+          puts "Update pos value with class #{info.class}"
+          return info.final_pos
+        end
+      end
     end
 
-    -1
+    pos
   end
   
+  def childs
+    ['SnakePositionFactory', 'LadderPositionFactory']
+  end
+
 end

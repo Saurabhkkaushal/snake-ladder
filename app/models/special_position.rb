@@ -1,4 +1,4 @@
-class SpecialPostion
+class SpecialPosition
   attr_accessor :position, :final_pos
 
   def initialize(args)

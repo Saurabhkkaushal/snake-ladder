@@ -1,4 +1,4 @@
-class LadderPosition
+class LadderPosition < SpecialPosition
   def initialize(args)
     start_pos = args[:position]
     end_pos = args[:final_pos]

@@ -8,23 +8,32 @@ class Player < User
     @position = 0
   end
 
-  def update_pos(output)
+  def update_pos(output, board)
     updated_pos = @position + output
-    return unless valid?(updated_pos)
+    return unless board.valid?(updated_pos)
 
-    updated_pos, flag = SnakePositionFactory.get_final_pos(updated_pos)
-      
-    updated_pos, flag = LadderPositionFactory.get_final_pos(updated_pos) unless flag
+    updated_pos = PositionFactory.new.get_final_pos(updated_pos)
 
     @position = updated_pos
   end
 
-  def won?
-    @position == Ladder.size
+  def won?(board)
+    @position == board.size
   end
 
-  def roll
-    Dice.new.roll_dice
+  def roll(dice)
+    
+    output = dice.roll_dice
+    total = output
+    count = 0
+    while(output == 6 && count < 3)
+      output = dice.roll_dice
+      total += output
+      count += 0
+    end
+
+    puts "O/p > 6 #{total}" if total > 6
+    total >= 18 ? 0 : total
   end
   
 end

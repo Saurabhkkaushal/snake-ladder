@@ -1,18 +1,18 @@
 class Turn
-  attr_accessor :name_of_players, :size
+  attr_accessor :players_objs, :size
 
   @@idx = 0
 
   def initialize(args)
-    @name_of_players = args[:name_of_players]
-    @size = args[:name_of_players].size
+    @players_objs = args[:players_objs]
+    @size = args[:players_objs].size
   end
 
   def turn
     @@idx += 1
     @@idx = @@idx % @size
 
-    @name_of_players[@@idx]    
+    @players_objs[@@idx]    
   end
   
 end
